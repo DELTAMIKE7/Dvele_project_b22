@@ -46,18 +46,36 @@ locoScroll();
 
 
 function loaderwalaeffect(){
+	// Moving Loader on Top -100%
     function loaderHide() {
-			gsap.to('.loader', {
+		const loaderTl = gsap.timeline();
+			loaderTl.to('.loader', {
 				top: '-100%',
 				duration: 3,
-			});
+			})
+			.to('.loader',{
+				display:"none",
+			})
 		}
 
-		const loader = document.querySelector('.loader');
 
+		// Moving Loader-Cursor
+		const loader = document.querySelector('.loader');
+		const loaderCursor = document.querySelector(".loader-cursor")
+		// gsap.set('loader-cursor',{x	Percent: -50 ,yPercent: -50});
+
+		loader.addEventListener("mousemove", (e)=>{
+			loaderCursor.style.top =e.pageY + "px";
+			loaderCursor.style.left = e.pageX + "px";
+			// gsap.to(loaderCursor, 0.7,{x: e.clientX ,y:e.clientY});
+		})
+
+
+		// This will move on top by Clicking on Loader Page
 		loader.addEventListener('click', () => {
 			loaderHide();
 		});
+
 }
 loaderwalaeffect();
 
